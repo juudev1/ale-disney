@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>El Libro Mágico de Ale | Disney Style</title>
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-slate-900 min-h-screen overflow-hidden">
+		<div class="fixed inset-0 pointer-events-none z-0">
+			<!-- Todo: Add starry background/sparkles here -->
+			<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900 via-purple-950 to-black"></div>
+			<div id="stars" class="absolute inset-0 z-0"></div>
+		</div>
+		<slot />
+		
+		<script>
+			// Generate Stars
+			const starsContainer = document.getElementById('stars');
+			if (starsContainer) {
+				for (let i = 0; i < 100; i++) {
+					const star = document.createElement('div');
+					// Tailwind classes for positioning and animation
+					star.className = 'absolute bg-white rounded-full animate-pulse';
+					
+					// Random size
+					const size = Math.random() * 2 + 1; // 1px to 3px
+					star.style.width = `${size}px`;
+					star.style.height = `${size}px`;
+					
+					// Random position
+					star.style.left = `${Math.random() * 100}%`;
+					star.style.top = `${Math.random() * 100}%`;
+					
+					// Random opacity and animation delay
+					star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
+					star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+					star.style.animationDelay = `${Math.random() * 5}s`;
+					
+					starsContainer.appendChild(star);
+				}
+			}
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--font-heading: 'Cinzel Decorative', cursive;
+		--font-script: 'Great Vibes', cursive;
+		--font-body: 'Lora', serif;
+	}
+
+	html, body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	body {
+		font-family: var(--font-body);
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-heading);
+	}
+	
+	.font-script {
+		font-family: var(--font-script);
+	}
+
+	/* Scrollbar hide */
+	::-webkit-scrollbar {
+		display: none;
+	}
+</style>

@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Book from "../components/Book";
+
+const videos = [
+  {
+    title: "Mi sueño",
+    description: `Desde que te conocí entendí que mi verdadero sueño no es un lugar ni un logro, sino una vida contigo. 
+    Sueño con casarme contigo, con despertar cada día a tu lado, con cuidar juntos a tus tres gatos como parte de nuestra pequeña familia. 
+    Sueño con vivir contigo en una casita como la que me has mostrado, llena de muñecos, ternurines, detalles y objetos que cuenten quién eres, con cosas hechas por ti y cosas que amas. 
+    Sueño con comprenderte, acompañarte, cuidarte y construir un hogar donde ambos nos sintamos seguros, amados y en paz. 
+    Aprendí que los sueños se vuelven reales cuando se comparten, y yo quiero compartir todos los míos contigo.`,
+    videoPath: "/videos/laprincesayelsapo1.mp4",
+  },
+  {
+    title: "Conocerte",
+    description: `Cambiaría cualquier camino, cualquier decisión y cualquier versión de mi historia solo por volver a ese momento en el que te conocí. 
+      Porque una vida entera no tendría sentido si no te hubiera encontrado, y haberlo hecho hace que cada día valga la pena. 
+      Conocerte fue entender que el amor no se mide en años, sino en lo que uno siente cuando encuentra a la persona correcta.`,
+    videoPath: "/videos/pocahontas1.mp4",
+  },
+  {
+    title: "Tus ojos",
+    description: `Tienes los ojos más bonitos que vi en toda mi vida; en ellos encuentro paz, y podría quedarme mirándolos por horas, porque son una razón constante para quedarme a tu lado.`,
+    videoPath: "/videos/losaristogatos1.mp4",
+  },
+  {
+    title: "Si te vas...",
+    description: `No imagino mi vida sin ti, no porque el mundo se acabe, sino porque contigo todo tiene más sentido. 
+    Eres la persona que le pone color a mis días, la que me da razones para quedarme, para intentar, para no soltar. Cuando pienso en perderte, lo único que quiero es sostenerte, acompañarte y recordarte que no estás sola. 
+    Yo elijo este mundo contigo, elijo caminar a tu lado incluso cuando todo pesa, porque tu presencia hace que valga la pena seguir aquí.`,
+    videoPath: "/videos/elemental.mp4",
+  },
+  {
+    title: "Haré todo por ti",
+    description: `Te he sentido lejos más de una vez, y cada vez ha dolido como si te perdiera de nuevo. A veces por errores, a veces por miedo, a veces por circunstancias que nos superaron. Pero aun así, sigo aquí, no porque no sepa soltar, sino porque sé lo que siento. No quiero volver a perderte por no intentar, por no aprender, por no crecer. Haré todo lo que esté en mis manos para cuidarte mejor, para escucharte más y para construir algo más sano entre nosotros.`,
+    videoPath: "/videos/lasirenita1.mp4",
+  },
+  {
+    title: "Te necesito",
+    // Inspirado en Los Simpson:
+    // Homero reconoce que Marge es su apoyo, su amor y su hogar,
+    // sin dejar de aceptar quién es él y cuánto la ama.
+    description: `Te necesito porque contigo me siento mejor persona, porque a tu lado aprendo, crezco y me siento acompañado. 
+      Te necesito para compartir la vida, para apoyarnos cuando las cosas pesan y para celebrar cuando todo va bien. No porque no pueda existir sin ti, sino porque contigo la vida es más bonita, más tranquila y más real. 
+      Te quiero porque me aceptas, porque me cuidas a tu manera y porque yo también quiero cuidarte, respetarte y quererte todos los días.`,
+    videoPath: "/videos/lossimpson.mp4",
+  },
+  {
+    title: "Nuestras diferencias",
+    // Inspirado en Zootopia:
+    // Judy y Nick no son iguales, discuten, se molestan y se burlan,
+    // pero eligen ser equipo y cuidarse mutuamente.
+    description: `No me importa que seamos distintos ni que a veces pensemos diferente. Lo que me importa eres tú. Me importa elegirte incluso cuando no estamos en la misma página, aprender a escucharnos y seguir siendo equipo. 
+    Puedo hacer bromas tontas sobre tus cejas, pero la verdad es que para mí eres hermosa siempre, con o sin ellas, en tus mejores días y en los más difíciles. Podrías tener bigotes sobre los bigotes y aun así seguirías siendo la mujer más hermosa para mí, porque lo que amo de ti va mucho más allá de lo que se ve. 
+    Quiero que caminemos juntos, con nuestras diferencias, riéndonos de ellas y cuidándonos en el camino.`,
+    videoPath: "/videos/zootopia.mp4",
+  },
+  {
+    title: "Te amo",
+    description: `Cuando digo que te amo, lo digo en serio. Es una palabra que no uso a la ligera, porque para mí significa cuidarte, respetarte y elegirte cada día con lo que soy.
+Sé muy bien que he fallado en algunas de estas cosas, y no lo ignoro ni lo minimizo. Pero ahí también está el amor: en reconocer los errores, en aprender de ellos y en crecer para no volver a herirte. 
+Te amo desde la intención de hacerlo mejor, de ser más consciente, más paciente y más cuidadoso contigo y con lo que siento por ti.`,
+    videoPath: "/videos/sherk.mp4",
+  },
+  {
+    title: "Gracias por quedarte..",
+description:
+  "Gracias por quedarte. Tu presencia se ha vuelto un hogar para mí, un lugar donde todo se siente más tranquilo y más en su lugar. Nadie había estado así conmigo, y por eso lo valoro tanto. Verte, escucharte y compartir contigo me hace sentir en casa, y eso es algo que guardo con mucho cariño en el fondo de mi corazón.",
+    videoPath: "/videos/nemo.mp4",
+  },
+];
+---
+
+<Layout>
+  <main
+    class="w-full h-screen flex flex-col items-center justify-center overflow-hidden relative"
+  >
+    <!-- Optional: Decorative background elements -->
+    <div
+      class="absolute top-10 left-10 text-yellow-200/20 text-9xl font-heading pointer-events-none select-none"
+    >
+      A
+    </div>
+    <div
+      class="absolute bottom-10 right-10 text-yellow-200/20 text-9xl font-heading pointer-events-none select-none"
+    >
+      Z
+    </div>
+
+    <!-- The Interactive Book -->
+    <!-- client:only is crucial for the pageflip library to work with window/document access -->
+    <div class="z-10 w-full max-w-6xl flex justify-center items-center">
+      <Book client:only="react" videos={videos} />
+    </div>
+
+    <!-- Footer / Controls hint -->
+    <div
+      class="absolute bottom-4 text-white/50 text-sm font-sans animate-bounce"
+    >
+      Haz clic o arrastra las esquinas para pasar de página ✨
+    </div>
+  </main>
+</Layout>
